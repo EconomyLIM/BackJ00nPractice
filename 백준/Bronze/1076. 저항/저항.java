@@ -13,7 +13,7 @@ public class Main {
 			temp[i] = br.readLine();
 		} //for
 		
-		int m= Integer.parseInt( Integer.toString( Arrays.asList(s).indexOf(temp[0])) + Integer.toString( Arrays.asList(s).indexOf(temp[1])) );
+		int m= Arrays.asList(s).indexOf(temp[0])*10 + Arrays.asList(s).indexOf(temp[1]);
 		long z = m * (long)(Math.pow(10, Arrays.asList(s).indexOf(temp[2])));
 		
 		System.out.println(z);

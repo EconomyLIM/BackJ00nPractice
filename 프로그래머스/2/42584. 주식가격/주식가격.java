@@ -1,11 +1,9 @@
 import java.util.*;
 class Solution {
     public List<Integer> solution(int[] prices) {
-        int[] answer = {};
         
         List<Integer> temp = new ArrayList<Integer>();
         int count = 0;
-        
         
         for(int i = 0 ; i < prices.length ; i++){
             count = 0;

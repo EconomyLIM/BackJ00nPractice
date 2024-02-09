@@ -57,7 +57,6 @@ class Solution {
                 if(map[mx][my] == 1 && !visited[mx][my]){
                     visited[mx][my] = true;
                     queue.add(new int[]{mx, my});
-                    set.add(my);
                 } // if
                 
             } //for

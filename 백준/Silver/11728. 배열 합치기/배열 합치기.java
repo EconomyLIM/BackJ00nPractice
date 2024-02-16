@@ -13,16 +13,14 @@ public class Main {
 		int m = Integer.parseInt(st.nextToken());
 		
 		ArrayList<Integer> list = new ArrayList<>();
-		int a[] = new int [n];
-		int b[] = new int [m];
 		
 		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < a.length; i++) {
+		for (int i = 0; i < n; i++) {
 			list.add(Integer.parseInt(st.nextToken()));
 		}
 		
 		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < b.length; i++) {
+		for (int i = 0; i < m; i++) {
 			list.add(Integer.parseInt(st.nextToken()));
 		}
 		

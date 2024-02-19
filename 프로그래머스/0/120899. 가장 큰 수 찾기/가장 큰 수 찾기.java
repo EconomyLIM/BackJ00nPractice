@@ -11,7 +11,7 @@ class Solution {
                 temp = i;
             }
         }
-        list.add(max);
+        list.add(max);;
         list.add(temp);  
         return list;
     }

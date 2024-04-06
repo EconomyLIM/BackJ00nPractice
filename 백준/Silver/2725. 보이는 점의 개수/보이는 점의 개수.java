@@ -8,22 +8,16 @@ public class Main {
 		int n = Integer.parseInt(br.readLine());
 		
 		int temp[] = new int[n];
-		int max = 0;
 		for (int i = 0; i < temp.length; i++) {
 			int a = Integer.parseInt(br.readLine());
-			if(max < a) {
-				max = a;
-			}
 			temp[i] = a;
 		} // for
 		
-		int [] dp = new int[max + 1];
+		int [] dp = new int[1000 + 1];
 		
 		dp[1] = 3;
-		dp[2] = 5;
-		
 		int cnt;
-		for (int i = 3; i < dp.length; i++) {
+		for (int i = 2; i < dp.length; i++) {
 			cnt = 0;
 			for(int j = 1 ; j < i ; j++) {
 				cnt += (gcd(i, j) == true) ? 1: 0;

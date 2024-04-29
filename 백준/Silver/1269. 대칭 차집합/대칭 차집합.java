@@ -11,36 +11,33 @@ public class Main {
         int aCnt = Integer.parseInt(st.nextToken());
         int bCnt = Integer.parseInt(st.nextToken());
 
-        Set<Integer> a = new HashSet<>();
-        Set<Integer> b = new HashSet<>();
+        Set<Integer> aSet = new HashSet<>();
+        Set<Integer> bSet = new HashSet<>();
 
         st = new StringTokenizer(br.readLine());
-
-        while (st.hasMoreTokens()){
-            a.add(Integer.parseInt(st.nextToken()));
+        for (int i = 0; i < aCnt; i++) {
+            aSet.add( Integer.parseInt(st.nextToken()) );
         }
 
         st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < bCnt; i++) {
+            bSet.add( Integer.parseInt(st.nextToken()) );
+        } // for
 
-        while (st.hasMoreTokens()){
-            b.add(Integer.parseInt(st.nextToken()));
+        int cnt = 0;
+        for (Integer num : aSet){
+            if(!bSet.contains(num)){
+                cnt++;
+            }
         }
+
+        for (Integer num : bSet){
+            if(!aSet.contains(num)){
+                cnt++;
+            }
+        }
+
+        System.out.println(cnt);
         
-        int allCnt = 0;
-
-        for(int num : a){
-            if(!b.contains(num)){
-               allCnt++;
-            }
-        }
-
-        for(int num : b){
-            if(!a.contains(num)){
-                allCnt++;
-            }
-        }
-
-        System.out.println(allCnt);
-
     }
 }

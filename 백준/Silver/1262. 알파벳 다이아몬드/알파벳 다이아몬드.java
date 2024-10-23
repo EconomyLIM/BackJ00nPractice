@@ -8,28 +8,33 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
-        int r1 = Integer.parseInt(st.nextToken());
-        int c1 = Integer.parseInt(st.nextToken());
-        int r2 = Integer.parseInt(st.nextToken());
-        int c2 = Integer.parseInt(st.nextToken());
-        
-        int dia = n * 2 - 1;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0, s = r1; i < r2 - r1 + 1; i++, s++) {
-            for (int j = 0, t = c1; j < c2 - c1 + 1; j++, t++) {
-                int x = s % dia;
-                int y = t % dia;
-                int dis = Math.abs(n - 1 - x) + Math.abs(n - 1 - y);
-                if(dis > n -1){
-                    sb.append(".");
-                }else{
-                    sb.append((char)('a' + (dis % 26)));
-                }
-            }
-            sb.append("\n");
-        }
+        int N = Integer.parseInt(st.nextToken());
+        int R1 = Integer.parseInt(st.nextToken());
+        int C1 = Integer.parseInt(st.nextToken());
+        int R2 = Integer.parseInt(st.nextToken());
+        int C2 = Integer.parseInt(st.nextToken());
 
-        System.out.println(sb.toString());
+        int rows = R2 - R1 + 1;
+        int cols = C2 - C1 + 1;
+        StringBuilder output = new StringBuilder();
+
+        for (int i = 0; i < rows; i++) {
+            int r = R1 + i;
+            for (int j = 0; j < cols; j++) {
+                int c = C1 + j;
+                output.append(getCharAt(N, r, c));
+            }
+            output.append('\n');
+        }
+        System.out.print(output);
+    }
+
+    private static char getCharAt(int N, int r, int c) {
+        int dia = 2 * N - 1;
+        int x = r % dia;
+        int y = c % dia;
+        int dist = Math.abs(N - 1 - x) + Math.abs(N - 1 - y);
+        return dist < N ? (char) ('a' + (dist % 26)) : '.';
     }
 }
+

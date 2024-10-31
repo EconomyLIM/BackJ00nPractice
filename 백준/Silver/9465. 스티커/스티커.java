@@ -11,34 +11,39 @@ public class Main {
         int n;
         StringTokenizer st;
         StringBuilder sb = new StringBuilder();
-        int [][] arr;
-        int [][] dp;
+        int[][] arr;
         for (int i = 0; i < T; i++) {
             n = Integer.parseInt(br.readLine());
             arr = new int[2][n + 1];
-            dp = new int[2][n + 1];
 
             st = new StringTokenizer(br.readLine());
             for (int j = 1; j <= n; j++) {
                 arr[0][j] = Integer.parseInt(st.nextToken());
-            } // for
+            }
 
             st = new StringTokenizer(br.readLine());
             for (int j = 1; j <= n; j++) {
                 arr[1][j] = Integer.parseInt(st.nextToken());
-            } // for
+            }
 
-            dp[0][1] = arr[0][1];
-            dp[1][1] = arr[1][1];
+            // 이전 값을 저장할 변수 (두 단계만 저장하여 메모리 최적화)
+            int prev0 = arr[0][1];
+            int prev1 = arr[1][1];
+            int prevPrev0 = 0, prevPrev1 = 0;
+            int curr0, curr1;
 
             for (int j = 2; j <= n; j++) {
-                dp[0][j] = Math.max(dp[1][j-1], dp[1][j-2]) + arr[0][j];
-                dp[1][j] = Math.max(dp[0][j-1], dp[0][j-2]) + arr[1][j];
-            } // for
+                curr0 = Math.max(prev1, prevPrev1) + arr[0][j];
+                curr1 = Math.max(prev0, prevPrev0) + arr[1][j];
 
-            sb.append(Math.max(dp[0][n], dp[1][n]))
-                    .append("\n");
-        } // for
+                prevPrev0 = prev0;
+                prevPrev1 = prev1;
+                prev0 = curr0;
+                prev1 = curr1;
+            }
+
+            sb.append(Math.max(prev0, prev1)).append("\n");
+        }
 
         System.out.println(sb.toString());
     }

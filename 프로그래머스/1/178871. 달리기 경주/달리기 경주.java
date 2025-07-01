@@ -7,23 +7,15 @@ class Solution {
             map.put(players[i], i);
         }
         
-        String prevCallingName = "";
-        String callingName = "";
-        int callingNameLevel = 0;
-        
-        for(int i = 0 ; i < callings.length ; i ++ ){
-            callingNameLevel = map.get(callings[i]);
-            prevCallingName = players[callingNameLevel-1];
-            callingName = callings[i];
-        
-            players[callingNameLevel-1] = callingName;
-            players[callingNameLevel] = prevCallingName;
+        for(String name : callings){
+            int rank = map.get(name);
             
-            // 이전에 있던 사람 순위는 불린 사람의 순위대로
-            map.put(prevCallingName, callingNameLevel);
+            String temp = players[rank-1];
+            players[rank] = temp;
+            players[rank-1] = name;
             
-            // 불린 사람의 이전 사람의 순위로 이동
-            map.put(callings[i], callingNameLevel - 1);
+            map.put(players[rank] , rank);
+            map.put(players[rank-1], rank -1);
         }
 
         return players;

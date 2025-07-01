@@ -1,38 +1,49 @@
 class Solution {
-    // "mm:ss" → 초 변환
-    private int toSec(String t) {
-        String[] s = t.split(":");
-        return Integer.parseInt(s[0]) * 60 + Integer.parseInt(s[1]);
+    
+    private static int getSeconds(String time){
+        String [] minuteSecond = time.split(":");
+        // if(minuteSecond.length < 2){
+        //     throw new IllegalException("올바른 형식이 아닙니다.");
+        // }
+        
+        int minute = Integer.parseInt(minuteSecond[0]);
+        int second = Integer.parseInt(minuteSecond[1]);
+        
+        return minute * 60 + second;
     }
-    // 초 → "mm:ss"
-    private String toMMSS(int sec) {
-        int m = sec / 60;
-        int s = sec % 60;
-        return String.format("%02d:%02d", m, s);
+    
+    private static String getMMSS(int seconds){
+        int minute = seconds / 60;
+        int second = seconds % 60;
+        
+        return String.format("%02d", minute) + ":" + String.format("%02d", second);
     }
-
+    
     public String solution(String video_len, String pos, String op_start, String op_end, String[] commands) {
-        int videoTime = toSec(video_len);
-        int currentTime = toSec(pos);
-        int opStart = toSec(op_start);
-        int opEnd = toSec(op_end);
-
-        // 시작 위치가 오프닝이면 바로 건너뜀
-        if (currentTime >= opStart && currentTime <= opEnd) {
-            currentTime = opEnd;
-        }
-
-        for (String cmd : commands) {
-            if (cmd.equals("prev")) {
+        String answer = "";
+        int videoTime = getSeconds(video_len);
+        int startTime = getSeconds(pos);
+        int openingStartTime = getSeconds(op_start);
+        int openingEndTime = getSeconds(op_end);
+        
+        int currentTime = startTime;
+        if(openingStartTime <= currentTime && currentTime <= openingEndTime){
+                currentTime = openingEndTime;
+            }
+        
+        for (String command : commands){
+            if("next".equals(command)){
+                currentTime = Math.min(currentTime + 10, videoTime);
+            }else{
                 currentTime = Math.max(0, currentTime - 10);
-            } else if (cmd.equals("next")) {
-                currentTime = Math.min(videoTime, currentTime + 10);
             }
-            // 오프닝 구간 건너뛰기
-            if (currentTime >= opStart && currentTime <= opEnd) {
-                currentTime = opEnd;
+            
+            if(openingStartTime <= currentTime && currentTime <= openingEndTime){
+                currentTime = openingEndTime;
             }
-        }
-        return toMMSS(currentTime);
+        } // for
+        
+        return getMMSS(currentTime);
     }
+    
 }

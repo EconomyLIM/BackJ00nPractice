@@ -1,24 +1,24 @@
 import java.util.*;
 
 class Solution {
-    public List<Integer> solution(String[] name, int[] yearning, String[][] photo) {
-
-        List<Integer> list = new ArrayList<>();
-        int score;
+    public int[] solution(String[] name, int[] yearning, String[][] photo) {
+        int[] answer = new int[photo.length];
+        Map<String,Integer> map = new HashMap<>();
+        for(int i = 0 ; i < name.length ; i++){
+            map.put(name[i], yearning[i]);
+        }
         
-        for(String [] photoList : photo){
-            score = 0;
-            for(String photos : photoList){
-                
-                for(int i = 0 ; i < name.length ; i++){
-                    if(photos.equals(name[i]))
-                        score += yearning[i];
-                }
-                
-            } // for
-            list.add(score);
-        } // for
+        for(int i = 0 ; i < photo.length ; i++){
+            String [] temp = photo[i];
+            int sum = 0;
+            for(int j = 0 ; j < temp.length ; j ++){
+                int score = map.getOrDefault(temp[j], 0);
+                sum += score;
+            }
+            answer[i] = sum;
+        }
         
-        return list;
+        
+        return answer;
     }
 }

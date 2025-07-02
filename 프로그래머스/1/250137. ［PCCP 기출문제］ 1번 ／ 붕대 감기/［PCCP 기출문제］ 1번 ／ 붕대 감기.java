@@ -15,15 +15,12 @@ class Solution {
             int duration = Math.max(currentSecond - startSecond - 1, 0); // 2
             int secondHealth = duration * upHealthPerSecond;
             int addHealth = (duration / doTime) * addUpHealth;
-            // System.out.println(duration);
-            // System.out.println(secondHealth);
-            // System.out.println(addHealth);
+
             health = Math.min(maxHealth, health + secondHealth + addHealth);
             
             // 현재 공격량 뺀 다음
             health -= attackDamage;
-            
-            System.out.println(health);
+
             // 죽었으면 -1 리턴
             if(health <= 0){
                 return -1;

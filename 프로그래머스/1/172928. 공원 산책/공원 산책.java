@@ -1,6 +1,5 @@
 class Solution {
     public int[] solution(String[] park, String[] routes) {
-        int[] answer = {};
         
         int xLength = park[0].length();
         int yLength = park.length;
@@ -19,9 +18,7 @@ class Solution {
                 }
             } // for
         } // for
-        
-
-        
+    
         int cx = startX;
         int cy = startY;
         
@@ -45,7 +42,6 @@ class Solution {
                 int mx = cx + dx * i;
                 int my = cy + dy * i;
                 
-                
                 // 공원 밖으로 넘는지 확인
                 if(mx < 0 || mx >= xLength || my < 0 || my >= yLength){
                     isGoing = false;
@@ -58,6 +54,7 @@ class Solution {
                 }
             } // for
             
+            // 통과했으면 move만큼 이동
             if(isGoing){
                 cx = cx + dx * move;
                 cy = cy + dy * move;

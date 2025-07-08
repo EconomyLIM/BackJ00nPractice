@@ -1,23 +1,25 @@
+import java.util.*;
+
 class Solution {
-    public int[] solution(String s) {
-        int[] answer = new int [s.length()];
+    public List<Integer> solution(String s) {
         
-        for(int i = 0 ; i < s.length() ; i++){
-            char temp = s.charAt(i);
-            boolean flag = false;
-            for(int j = 0 ; j < i ; j++){
-                if(s.charAt(j) == temp){
-                    answer[i] = i - j;
-                    flag = true;
-                }
-            }
+        Map<String, Integer> map = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        String[] stringArray = s.split("");
+        
+        for(int i = 0 ; i < stringArray.length ; i++){
             
-            if(!flag){
-                answer[i] = -1;
+            if(map.containsKey(stringArray[i])){
+                int lastIndex = map.get(stringArray[i]);
+                list.add(i - lastIndex);
+                map.put(stringArray[i], i);
+            }else{
+                list.add(-1);
+                map.put(stringArray[i], i);
             }
             
         }
         
-        return answer;
+        return list;
     }
 }
